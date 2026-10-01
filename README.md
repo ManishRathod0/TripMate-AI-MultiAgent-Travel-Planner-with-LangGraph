@@ -17,9 +17,19 @@
 ## Git Flow 
 
 git reset --soft origin/main
-echo .env >> .gitignore
-git rm --cached .env
+
+@"
+.env
+venv/
+.venv/
+__pycache__/
+*.pyc
+"@ | Set-Content .gitignore -Encoding utf8
+
+git rm --cached --ignore-unmatch .env
+
+git check-ignore -v .env
+
 git add .
+
 git status
-git commit -m "folder structure added"
-git push origin main
